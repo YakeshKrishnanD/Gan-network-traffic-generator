@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cybersecurity GAN Telemetry Hub</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0f172a; color: #f8fafc; text-align: center; padding: 50px; }
+        .card { background: #1e293b; border-radius: 8px; padding: 30px; max-width: 500px; margin: 20px auto; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.5); text-align: left; }
+        .btn-panel { display: flex; justify-content: center; gap: 15px; margin-top: 15px; }
+        button { color: white; border: none; padding: 12px 24px; font-size: 16px; border-radius: 6px; cursor: pointer; transition: 0.2s; font-weight: bold; }
+        .btn-blue { background: #3b82f6; width: 100%; } .btn-blue:hover { background: #2563eb; }
+        .btn-green { background: #10b981; width: 100%; } .btn-green:hover { background: #059669; }
+        .metric { margin: 20px 0; font-size: 18px; border-bottom: 1px dashed #334155; padding-bottom: 5px; }
+        span { font-weight: bold; color: #38bdf8; float: right; }
+        h2 { margin-top: 0; color: #f1f5f9; border-bottom: 2px solid #334155; padding-bottom: 10px; font-size: 20px; }
+        .input-group { margin: 20px 0; display: flex; align-items: center; justify-content: space-between; }
+        select { background: #0f172a; color: #38bdf8; border: 1px solid #334155; padding: 10px; border-radius: 6px; font-size: 16px; width: 50%; font-weight: bold; text-align: center; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <h1>Cybersecurity GAN Management Control Panel</h1>
+
+    <div class="card">
+        <h2>1. Real-Time Telemetry Simulation</h2>
+        <p>Generate a single, live network packet footprint directly from the active neural network weights.</p>
+        <div class="metric">Connection Duration: <span id="dur">-</span></div>
+        <div class="metric">Source Bytes: <span id="src">-</span></div>
+        <div class="metric">Destination Bytes: <span id="dst">-</span></div>
+        <div class="btn-panel">
+            <button id="genBtn" class="btn-blue">Generate Single Packet Log</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>2. Custom NIDS Dataset Generation</h2>
+        <p>Specify the absolute data pipeline payload scale you want to construct for custom intrusion modeling.</p>
+        
+        <form action="/generate_bulk" method="POST">
+            <div class="input-group">
+                <label for="record_count" style="font-size: 16px; font-weight: 500;">Select Volume Load:</label>
+                <select name="record_count" id="record_count">
+                    <option value="100">100 Records (Quick Sample)</option>
+                    <option value="500">500 Records</option>
+                    <option value="1000" selected>1,000 Records (Standard)</option>
+                    <option value="5000">5,000 Records</option>
+                    <option value="10000">10,000 Records (Full Evaluation)</option>
+                </select>
+            </div>
+            
+            <div class="btn-panel">
+                <button type="submit" class="btn-green">Synthesize and Download CSV</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Real-time Single Generator Trigger
+        document.getElementById('genBtn').addEventListener('click', async () => {
+            const response = await fetch('/generate', { method: 'POST' });
+            const data = await response.json();
+            if(data.status === 'success') {
+                document.getElementById('dur').innerText = data.duration;
+                document.getElementById('src').innerText = data.src_bytes;
+                document.getElementById('dst').innerText = data.dst_bytes;
+            } else {
+                alert("Error interacting with model weights");
+            }
+        });
+    </script>
+</body>
+</html>
