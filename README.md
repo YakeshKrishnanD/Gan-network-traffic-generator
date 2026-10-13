@@ -107,8 +107,3 @@ Yakesh Krishnan D
 GAN Network Traffic Generator — Deep learning-based synthetic network traffic modeling and generation tool.
 
 ⭐ If you find this project useful, consider giving the repository a star.
-
-
-GAN Network Traffic Generator — Deep learning-based synthetic network traffic modeling and generation tool.
-
-⭐ If you find this project useful, consider giving the repository a star.
